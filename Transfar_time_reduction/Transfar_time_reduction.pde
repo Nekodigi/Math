@@ -1,6 +1,6 @@
 //parameter
-float carS = 10;//km/h
-float humanS = 40;//km/h
+float carS = 40;//km/h
+float humanS = 10;//km/h
 float t = 550./60;//h Humans depart t hours before the car arrives
 float h = 0;//accumrated time
 float dt = 0.001;//h
