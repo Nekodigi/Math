@@ -43,7 +43,7 @@ class Stick{
   boolean inter = false;//intersect
   
   Stick(){
-    spos = new PVector(random(width), random(height));
+    spos = new PVector(random(l, width-l), random(l, height-l));
     epos = PVector.fromAngle(random(TWO_PI)).mult(l).add(spos);
   }
   
