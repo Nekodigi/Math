@@ -1,11 +1,11 @@
 ArrayList<Stick> sticks = new ArrayList<Stick>();
 ArrayList<Line> lines = new ArrayList<Line>();
-float l = 2160/20, d = 2*l;
+float l = 50, d = 2*l;
 float ntest, ninter;
 
 void setup(){
-  //size(500, 500);
-  fullScreen();
+  size(500, 500);
+  //fullScreen();
   for(int i = 0; i <= height; i+=d){
     lines.add(new Line(i));
   }
@@ -30,12 +30,12 @@ void draw(){
   }
   fill(255);
   noStroke();
-  rect(0, 0, 1000, 200);
-  textSize(100);
+  rect(0, 0, 500, 100);
+  textSize(50);
   fill(0);
   textAlign(LEFT, TOP);
   text("1/PI="+(1/PI), 0, 0);
-  text("P="+ninter/ntest, 0, 100);
+  text("P="+ninter/ntest, 0, 50);
 }
 
 class Stick{
