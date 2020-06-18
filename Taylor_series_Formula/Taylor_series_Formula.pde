@@ -1,35 +1,42 @@
 float[] coeff;//coefficient x^2+x+c 
 //float[] coeffs = {1, 2, 1, 3};
 float a = 5;
+float minS = -6, maxS = 6;
 
 void setup(){
   size(500, 500);
+  //fullScreen();
+}
+
+void draw(){
+  background(255);
+  a = map(mouseX, 0, width, minS, maxS);
+  textSize(20);
+  textAlign(LEFT, TOP);
+  fill(0);
+  text("a="+a, 0, 0);
   coeff = solveCoeff(10, a);
   //視覚化
   noFill();
   strokeWeight(10);
   //本当のSinX
-  stroke(255);
+  stroke(200);
   beginShape();
   for(int i = 0; i < width; i++){
-    float x = map(i, 0, width, -6, 6);
+    float x = map(i, 0, width, minS, maxS);
     float val = sin(x);
-    vertex(i, height/2-val*30);
+    vertex(i, height/2-val*height/6);
   }
   endShape();
   //推定したSinX
   stroke(0);
   beginShape();
   for(int i = 0; i < width; i++){
-    float x = map(i, 0, width, -6, 6);
+    float x = map(i, 0, width, minS, maxS);
     float val = polyValue(x, coeff);
-    vertex(i, height/2-val*30);
+    vertex(i, height/2-val*height/6);
   }
   endShape();
-}
-
-void draw(){
-  
 }
 
 float[] solveCoeff(int n, float a){
