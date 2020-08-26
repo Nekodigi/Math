@@ -58,7 +58,9 @@ PVector UVmap(PVector ua, PVector va, float ux, float vx){//u axis, v axis, u va
 }
 
 void apolloniusGraph(float r1, float r2, PVector A, PVector B){
-  int res = 20;
+  ArrayList<PVector> results = new ArrayList<PVector>();
+  int res = 10;
+  float guideOff = r1 < r2 ? -(width + height) : (width + height);
   
   float c = A.dist(B);
   PVector u = PVector.sub(B, A).normalize();
@@ -75,6 +77,7 @@ void apolloniusGraph(float r1, float r2, PVector A, PVector B){
     float cosA = (b*b + c*c - a*a)/(2*b*c);//using law of cosine
     float sinA = sqrt(1-cosA*cosA);
     PVector C = UVmap(u, v, cosA*b, sinA*b).add(A);
+    if(i == 0)vertex(UVmap(u, v, cosA*b+guideOff, sinA*b).add(A).x, UVmap(u, v, cosA*b+guideOff, sinA*b).add(A).y);
     vertex(C.x, C.y);
   }
   
@@ -89,6 +92,15 @@ void apolloniusGraph(float r1, float r2, PVector A, PVector B){
     
     PVector C = UVmap(u, v, cosA*b, -sinA*b).add(A);
     vertex(C.x, C.y);
+    if(i == res)vertex(UVmap(u, v, cosA*b+guideOff, -sinA*b).add(A).x, UVmap(u, v, cosA*b+guideOff, -sinA*b).add(A).y);
+  }
+  if(r1 < r2){//anyway it's seem nessesary 
+    ArrayList<PVector> Nresults = new ArrayList<PVector>();
+    for(int i=results.size()-1; i>=0; i--){
+      Nresults.add(results.get(i));
+    }
+    results = Nresults;
   }
   endShape();
+  //return results;
 }
